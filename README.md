@@ -2,7 +2,8 @@
 
 **We Built Detectors for a Threat That Didn't Arrive**
 
-[Shaina Raza](https://scholar.google.com/citations?user=chcz7RMAAAAJ&hl=en) · 
+[Shaina Raza](https://scholar.google.com/citations?user=chcz7RMAAAAJ&hl=en) · [Vector Institute for Artificial Intelligence](https://vectorinstitute.ai)
+
 <!-- [Paper](#) · [arXiv](#) · [Slides](#) · [Project Page](https://shainarazavi.github.io/deepfakes-we-missed/) -->
 
 ---

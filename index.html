@@ -3,527 +3,574 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<title>The Deepfakes We Missed</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    font-family: 'Nunito Sans', -apple-system, sans-serif;
-    background: #fff;
-    color: #1a1a1a;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:#171717;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+
+.page{
+  max-width:860px;
+  margin:0 auto;
+  padding:3rem 1.4rem 4rem;
+}
+
+h1{
+  font-family:'Crimson Pro',serif;
+  font-size:clamp(2rem,4vw,3rem);
+  line-height:1.1;
+  text-align:center;
+  margin-bottom:.5rem;
+  color:#111827;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:1.15rem;
+  color:#5b6472;
+  margin-bottom:1.8rem;
+  font-family:'Crimson Pro',serif;
+}
+
+.author{
+  text-align:center;
+  margin-bottom:.25rem;
+}
+
+.author a{
+  color:#111827;
+  text-decoration:none;
+  font-weight:700;
+  border-bottom:2px solid #7c3aed;
+}
+
+.affiliation{
+  text-align:center;
+  color:#6b7280;
+  font-size:.92rem;
+  margin-bottom:2rem;
+}
+
+.affiliation a{
+  color:#6b7280;
+  text-decoration:none;
+}
+
+.links{
+  display:flex;
+  justify-content:center;
+  gap:.8rem;
+  flex-wrap:wrap;
+  margin-bottom:2.6rem;
+}
+
+.links a{
+  text-decoration:none;
+  color:#111827;
+  border:1px solid #d4d4d8;
+  padding:.55rem 1rem;
+  border-radius:8px;
+  font-size:.85rem;
+  font-weight:600;
+  transition:.2s ease;
+}
+
+.links a:hover{
+  border-color:#7c3aed;
+  color:#7c3aed;
+}
+
+hr{
+  border:none;
+  border-top:1px solid #e5e7eb;
+  margin:2.5rem 0;
+}
+
+.section-title{
+  font-family:'Crimson Pro',serif;
+  font-size:1.6rem;
+  text-align:center;
+  margin-bottom:1rem;
+  color:#111827;
+}
+
+.abstract{
+  font-size:1rem;
+  color:#374151;
+  text-align:justify;
+}
+
+.highlight-box{
+  background:#faf7ff;
+  border-left:4px solid #7c3aed;
+  padding:1.2rem 1.4rem;
+  border-radius:8px;
+  margin-top:1.6rem;
+}
+
+.highlight-box p{
+  color:#374151;
+}
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:1.4rem;
+}
+
+.stat{
+  padding:1.4rem 1rem;
+  text-align:center;
+  border-right:1px solid #e5e7eb;
+}
+
+.stat:last-child{
+  border-right:none;
+}
+
+.stat-number{
+  font-family:'Crimson Pro',serif;
+  font-size:2rem;
+  color:#7c3aed;
+  font-weight:700;
+}
+
+.stat-label{
+  font-size:.72rem;
+  text-transform:uppercase;
+  color:#9ca3af;
+  margin-top:.25rem;
+  letter-spacing:.05em;
+}
+
+.stat-desc{
+  margin-top:.45rem;
+  font-size:.82rem;
+  color:#4b5563;
+}
+
+.figure{
+  margin-top:1.5rem;
+}
+
+.bar-chart{
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+  gap:2.5rem;
+  height:220px;
+  border-bottom:1px solid #d1d5db;
+  padding-bottom:1rem;
+}
+
+.bar-group{
+  text-align:center;
+}
+
+.bar{
+  width:58px;
+  border-radius:8px 8px 0 0;
+}
+
+.bar-value{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  margin-bottom:.5rem;
+}
+
+.bar-label{
+  margin-top:.7rem;
+  font-size:.78rem;
+  color:#6b7280;
+  line-height:1.4;
+}
+
+.caption{
+  margin-top:.8rem;
+  font-size:.82rem;
+  color:#6b7280;
+  line-height:1.6;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:1rem;
+}
+
+thead th{
+  text-align:left;
+  font-size:.72rem;
+  text-transform:uppercase;
+  color:#9ca3af;
+  border-bottom:2px solid #111827;
+  padding:.75rem .6rem;
+}
+
+tbody td{
+  padding:.8rem .6rem;
+  border-bottom:1px solid #f1f5f9;
+  color:#374151;
+}
+
+.code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.8rem;
+  color:#7c3aed;
+  font-weight:600;
+}
+
+.contrib-list{
+  margin-top:1rem;
+  padding-left:1.3rem;
+}
+
+.contrib-list li{
+  margin-bottom:.9rem;
+  color:#374151;
+}
+
+.agenda{
+  margin-top:1rem;
+}
+
+.agenda-item{
+  padding:1rem 0;
+  border-bottom:1px solid #ececec;
+}
+
+.agenda-item:last-child{
+  border-bottom:none;
+}
+
+.agenda-title{
+  font-weight:700;
+  color:#111827;
+  margin-bottom:.4rem;
+}
+
+.agenda-body{
+  color:#4b5563;
+  font-size:.95rem;
+}
+
+.bibtex{
+  background:#fafafa;
+  border:1px solid #e5e7eb;
+  border-radius:10px;
+  padding:1.2rem;
+  overflow:auto;
+}
+
+pre{
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.7;
+  color:#374151;
+}
+
+.footer{
+  text-align:center;
+  margin-top:3rem;
+  padding-top:1.5rem;
+  border-top:1px solid #ececec;
+  font-size:.82rem;
+  color:#9ca3af;
+}
+
+.footer a{
+  color:#6b7280;
+  text-decoration:none;
+}
+
+@media(max-width:700px){
+
+  .stats-grid{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .page {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 2.8rem 1.5rem 3.5rem;
+  .stat{
+    border-bottom:1px solid #e5e7eb;
   }
 
-  .conf-tag {
-    text-align: center;
-    font-size: .78rem;
-    font-weight: 600;
-    color: #7c3aed;
-    letter-spacing: .03em;
-    margin-bottom: 1.6rem;
+  .bar-chart{
+    gap:1rem;
   }
 
-  h1 {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-weight: 700;
-    font-size: clamp(1.7rem, 4.5vw, 2.5rem);
-    text-align: center;
-    line-height: 1.18;
-    color: #111;
-    margin-bottom: .35rem;
+  .bar{
+    width:42px;
   }
-  .subtitle {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-weight: 400;
-    font-size: clamp(1.05rem, 2.5vw, 1.35rem);
-    text-align: center;
-    color: #555;
-    line-height: 1.35;
-    margin-bottom: 1.6rem;
-  }
+}
 
-  .authors { text-align: center; margin-bottom: .3rem; }
-  .authors a {
-    font-size: 1.02rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1.5px solid #7c3aed;
-    padding-bottom: 1px;
-    transition: color .15s;
-  }
-  .authors a:hover { color: #7c3aed; }
-  .affiliation {
-    text-align: center;
-    font-size: .88rem;
-    color: #777;
-    margin-bottom: 1.5rem;
-  }
-  .affiliation a {
-    color: #777;
-    text-decoration: none;
-    border-bottom: 1px solid #ccc;
-    transition: color .15s;
-  }
-  .affiliation a:hover { color: #7c3aed; }
-
-  .links {
-    display: flex;
-    justify-content: center;
-    gap: .6rem;
-    flex-wrap: wrap;
-    margin-bottom: 2.5rem;
-  }
-  .links a {
-    display: inline-flex;
-    align-items: center;
-    gap: .35rem;
-    font-size: .8rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    text-decoration: none;
-    padding: .45rem 1rem;
-    border: 1.5px solid #d0d0d0;
-    border-radius: 5px;
-    transition: all .15s;
-  }
-  .links a:hover { border-color: #7c3aed; color: #7c3aed; }
-  .links a svg { flex-shrink: 0; }
-
-  hr { border: none; border-top: 1px solid #e5e5e5; margin: 2rem 0; }
-
-  .sec-title {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-weight: 600;
-    font-size: 1.4rem;
-    color: #111;
-    margin-bottom: .7rem;
-    text-align: center;
-  }
-
-  .abstract {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-size: 1.02rem;
-    line-height: 1.72;
-    color: #333;
-    text-align: justify;
-    margin-bottom: .5rem;
-  }
-
-  .position-block {
-    background: #f8f6ff;
-    border-left: 3px solid #7c3aed;
-    padding: 1.1rem 1.4rem;
-    margin: 1.5rem 0 .5rem;
-    border-radius: 0 4px 4px 0;
-  }
-  .position-block p {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-size: .95rem;
-    line-height: 1.65;
-    color: #333;
-  }
-  .position-block strong { color: #111; }
-
-  .results-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    margin: 1.2rem 0;
-    border: 1px solid #e5e5e5;
-    border-radius: 6px;
-    overflow: hidden;
-  }
-  .result-cell {
-    text-align: center;
-    padding: 1.1rem .8rem;
-    border-right: 1px solid #e5e5e5;
-  }
-  .result-cell:last-child { border-right: none; }
-  .result-num {
-    font-family: 'Crimson Pro', Georgia, serif;
-    font-weight: 700;
-    font-size: 1.65rem;
-    color: #7c3aed;
-    line-height: 1.1;
-  }
-  .result-unit {
-    font-size: .68rem;
-    font-weight: 600;
-    color: #999;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    margin-top: .3rem;
-  }
-  .result-desc {
-    font-size: .74rem;
-    color: #666;
-    margin-top: .25rem;
-    line-height: 1.4;
-  }
-
-  .figure { margin: 1.5rem 0; text-align: center; }
-  .fig-caption {
-    font-size: .8rem;
-    color: #777;
-    margin-top: .6rem;
-    line-height: 1.5;
-    text-align: left;
-  }
-  .fig-caption strong { color: #444; }
-
-  .bar-chart {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 3rem;
-    height: 170px;
-    padding: 0 1.5rem;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: .4rem;
-  }
-  .bar-group { text-align: center; position: relative; }
-  .bar-col {
-    width: 48px;
-    border-radius: 3px 3px 0 0;
-    margin: 0 auto;
-  }
-  .bar-val {
-    font-family: 'Fira Code', monospace;
-    font-size: .72rem;
-    font-weight: 500;
-    margin-bottom: .3rem;
-    color: #333;
-  }
-  .bar-lbl {
-    font-size: .7rem;
-    color: #888;
-    margin-top: .4rem;
-    line-height: 1.35;
-    max-width: 90px;
-  }
-  .bar-annot {
-    position: absolute;
-    right: -55px;
-    top: 10px;
-    font-size: .62rem;
-    color: #999;
-    white-space: nowrap;
-    font-style: italic;
-  }
-
-  .cat-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    font-size: .85rem;
-  }
-  .cat-table thead th {
-    text-align: left;
-    font-size: .72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-    color: #999;
-    padding: .5rem .6rem;
-    border-bottom: 2px solid #222;
-  }
-  .cat-table tbody td {
-    padding: .5rem .6rem;
-    border-bottom: 1px solid #eee;
-    vertical-align: middle;
-  }
-  .cat-table tbody tr:last-child td { border-bottom: none; }
-  .cat-label {
-    font-family: 'Fira Code', monospace;
-    font-size: .75rem;
-    font-weight: 500;
-    display: inline-block;
-    min-width: 26px;
-  }
-  .cat-bar-wrap { display: flex; align-items: center; gap: .5rem; }
-  .cat-bar { height: 8px; border-radius: 4px; }
-  .cat-pct { font-family: 'Fira Code', monospace; font-size: .75rem; color: #888; }
-
-  .contrib-list {
-    list-style: none;
-    counter-reset: contrib;
-    margin: .8rem 0;
-  }
-  .contrib-list li {
-    counter-increment: contrib;
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: .7rem;
-    font-size: .9rem;
-    line-height: 1.6;
-    color: #333;
-  }
-  .contrib-list li::before {
-    content: "(" counter(contrib) ")";
-    position: absolute;
-    left: 0;
-    font-family: 'Fira Code', monospace;
-    font-size: .78rem;
-    font-weight: 500;
-    color: #7c3aed;
-  }
-
-  .agenda-block { margin: .8rem 0; }
-  .agenda-item {
-    padding: .9rem 0;
-    border-bottom: 1px solid #eee;
-  }
-  .agenda-item:last-child { border-bottom: none; }
-  .agenda-head {
-    font-weight: 700;
-    font-size: .9rem;
-    color: #111;
-    margin-bottom: .25rem;
-  }
-  .agenda-head .roman {
-    font-family: 'Crimson Pro', serif;
-    color: #7c3aed;
-    font-size: 1rem;
-    margin-right: .4rem;
-  }
-  .agenda-body {
-    font-size: .85rem;
-    color: #555;
-    line-height: 1.6;
-    padding-left: 1.6rem;
-  }
-
-  .bibtex-block {
-    background: #fafafa;
-    border: 1px solid #e5e5e5;
-    border-radius: 5px;
-    padding: 1rem 1.2rem;
-    margin: .8rem 0;
-    position: relative;
-  }
-  .bibtex-block pre {
-    font-family: 'Fira Code', monospace;
-    font-size: .73rem;
-    line-height: 1.65;
-    color: #444;
-    white-space: pre-wrap;
-    margin: 0;
-  }
-  .copy-btn {
-    position: absolute;
-    top: .6rem; right: .6rem;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: .3rem .55rem;
-    font-size: .68rem;
-    font-weight: 600;
-    color: #888;
-    cursor: pointer;
-    transition: all .15s;
-  }
-  .copy-btn:hover { color: #7c3aed; border-color: #7c3aed; }
-
-  .footer {
-    text-align: center;
-    padding-top: 1.5rem;
-    font-size: .75rem;
-    color: #bbb;
-    border-top: 1px solid #eee;
-    margin-top: 2rem;
-  }
-  .footer a { color: #aaa; text-decoration: none; }
-  .footer a:hover { color: #7c3aed; }
-
-  @media (max-width: 600px) {
-    .results-grid { grid-template-columns: repeat(2, 1fr); }
-    .result-cell:nth-child(2) { border-right: none; }
-    .result-cell:nth-child(1), .result-cell:nth-child(2) { border-bottom: 1px solid #e5e5e5; }
-    .bar-chart { gap: 1.5rem; }
-    .bar-col { width: 36px; }
-    .bar-annot { display: none; }
-  }
 </style>
 </head>
+
 <body>
 
 <div class="page">
 
-  <h1>The Deepfakes We Missed</h1>
-  <div class="subtitle">We Built Detectors for a Threat That Didn't Arrive</div>
-  <div class="authors"><a href="https://scholar.google.com/citations?user=chcz7RMAAAAJ&hl=en" target="_blank">Shaina Raza</a></div>
-  <div class="affiliation"><a href="https://vectorinstitute.ai" target="_blank">Vector Institute for Artificial Intelligence</a></div>
+<h1>The Deepfakes We Missed</h1>
 
-  <div class="links">
-    <a href="#">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      Paper
-    </a>
-    <a href="#">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-      arXiv
-    </a>
-    <a href="#">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-      Code
-    </a>
-    <a href="#">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      Slides
-    </a>
-  </div>
+<div class="subtitle">
+We Built Detection Systems for a Threat Model That Never Fully Materialized
+</div>
 
-  <hr>
+<div class="author">
+<a href="https://scholar.google.com/citations?user=chcz7RMAAAAJ&hl=en">
+Shaina Raza
+</a>
+</div>
 
-  <div class="sec-title">Abstract</div>
-  <p class="abstract">
-    Nearly a decade of ML research on deepfake detection has been organized around a threat model inherited from 2017–2019: face-swap and talking-head manipulation of public figures, motivated by concerns about large-scale misinformation and video-evidence fraud. This position paper argues that the threat the field prepared for did not arrive, and the threats that did arrive are substantially different. An accounting of deepfake incidents in 2022–2026 shows that the dominant observed harms are peer-generated non-consensual intimate imagery (NCII), voice-clone scam calls targeting families and finance workers, and emotional-manipulation fraud. The predicted large-scale public-figure deepfake catastrophe did not materialize during the 2024 global election cycle despite extensive preparation. Meanwhile, research effort, benchmarks, and detection methods remain concentrated on the inherited threat model. We argue this misalignment is now the dominant bottleneck on real-world deepfake defense, not model capability, and support this position with empirical accounting of research effort and harm distribution, a diagnosis of structural persistence mechanisms, and three concrete technical research agendas for the under-defended harm categories.
-  </p>
+<div class="affiliation">
+<a href="https://vectorinstitute.ai">
+Vector Institute for Artificial Intelligence
+</a>
+</div>
 
-  <div class="position-block">
-    <p><strong>Position.</strong> The dominant bottleneck on real-world deepfake defense is no longer model capability but a misalignment between the threat model the field organized around and the harms that actually materialized at scale. The ML community should substantially rebalance toward: real-time voice-clone detection in telecommunications, on-device privacy-preserving NCII detection with victim-centered workflows, and messaging-layer defenses for peer-distributed synthetic content.</p>
-  </div>
+<div class="links">
+  <a href="#">Paper</a>
+  <a href="#">arXiv</a>
+  <a href="#">Code</a>
+  <a href="#">Slides</a>
+</div>
 
-  <hr>
+<hr>
 
-  <div class="sec-title">Key Results</div>
-  <div class="results-grid">
-    <div class="result-cell">
-      <div class="result-num">71%</div>
-      <div class="result-unit">of papers</div>
-      <div class="result-desc">target T1 public-figure video</div>
-    </div>
-    <div class="result-cell">
-      <div class="result-num">260&times;</div>
-      <div class="result-unit">growth</div>
-      <div class="result-desc">AI-CSAM videos, 2024&rarr;2025</div>
-    </div>
-    <div class="result-cell">
-      <div class="result-num">0/13</div>
-      <div class="result-unit">benchmarks</div>
-      <div class="result-desc">cover T2, T4, or T5</div>
-    </div>
-    <div class="result-cell">
-      <div class="result-num">438</div>
-      <div class="result-unit">papers</div>
-      <div class="result-desc">classified, 2017–2025</div>
-    </div>
-  </div>
+<div class="section-title">Abstract</div>
 
-  <hr>
+<p class="abstract">
+Deepfake detection research has largely focused on a threat model inherited from the 2017–2019 wave of public concern: face-swap and talking-head manipulation targeting politicians, celebrities, and public figures. This paper argues that the dominant harms that ultimately emerged between 2022 and 2026 differ substantially from those assumptions. Real-world incidents are now concentrated around peer-generated non-consensual intimate imagery (NCII), voice-clone scam calls, emotional-manipulation fraud, and private messaging-based distribution. Meanwhile, benchmark design, datasets, and detection systems remain heavily concentrated on public-figure video manipulation. We present a large-scale classification of 438 papers published between 2017 and 2025 across five threat categories and compare research allocation against observed harm distributions. Our analysis suggests that the primary bottleneck in practical deepfake defense is no longer model capability alone, but a persistent mismatch between research priorities and deployed harms. We further identify structural causes behind this misalignment and outline three concrete research agendas for under-defended categories.
+</p>
 
-  <div class="sec-title">Research Effort vs. Observed Harm</div>
-  <div class="figure">
-    <div class="bar-chart">
-      <div class="bar-group">
-        <div class="bar-val">75</div>
-        <div class="bar-col" style="height:20px; background:#bbb;"></div>
-        <div class="bar-lbl">T1 papers<br>(2024)</div>
-      </div>
-      <div class="bar-group">
-        <div class="bar-val">3,443</div>
-        <div class="bar-col" style="height:92px; background:#c0392b;"></div>
-        <div class="bar-lbl">IWF AI-CSAM<br>videos (2025)</div>
-      </div>
-      <div class="bar-group" style="position:relative;">
-        <div class="bar-val">22,364</div>
-        <div class="bar-col" style="height:155px; background:#7c3aed;"></div>
-        <div class="bar-lbl">IC3 complaints<br>(2025)</div>
-        <div class="bar-annot">&larr; ~2.5 orders of<br>&nbsp;&nbsp;&nbsp;magnitude gap</div>
-      </div>
-    </div>
-    <div class="fig-caption"><strong>Figure 1(B).</strong> Research effort vs. observed harm on a common log scale. T1 paper volume grows in a linear band while harm indicators for under-defended categories jump multiple orders of magnitude.</div>
-  </div>
+<div class="highlight-box">
+<p>
+<strong>Core Argument.</strong> The main limitation in real-world deepfake defense is increasingly a mismatch between the threat models prioritized by the research community and the harms observed in practice. Future work should place greater emphasis on telecommunications-scale voice-clone detection, privacy-preserving NCII protection, and messaging-layer defenses for peer-distributed synthetic media.
+</p>
+</div>
 
-  <hr>
+<hr>
 
-  <div class="sec-title">Threat Taxonomy &amp; Corpus Distribution</div>
-  <table class="cat-table">
-    <thead>
-      <tr><th></th><th>Category</th><th>Share (n=389)</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="cat-label">T1</span></td>
-        <td>Public-figure face-swap &amp; talking-head video</td>
-        <td><div class="cat-bar-wrap"><div class="cat-bar" style="width:180px; background:#7c3aed;"></div><span class="cat-pct">71.0%</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="cat-label">T3</span></td>
-        <td>Audio / voice-clone</td>
-        <td><div class="cat-bar-wrap"><div class="cat-bar" style="width:72px; background:#a78bfa;"></div><span class="cat-pct">28.5%</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="cat-label">T2</span></td>
-        <td>Peer-generated NCII</td>
-        <td><div class="cat-bar-wrap"><div class="cat-bar" style="width:3px; background:#c0392b;"></div><span class="cat-pct">1 paper</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="cat-label">T5</span></td>
-        <td>Messaging-layer / peer-distributed</td>
-        <td><div class="cat-bar-wrap"><div class="cat-bar" style="width:3px; background:#e67e22;"></div><span class="cat-pct">1 paper</span></div></td>
-      </tr>
-      <tr>
-        <td><span class="cat-label">T4</span></td>
-        <td>Real-time / live-stream</td>
-        <td><div class="cat-bar-wrap"><span class="cat-pct" style="color:#ccc;">0 papers</span></div></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="section-title">Key Findings</div>
 
-  <hr>
+<div class="stats-grid">
 
-  <div class="sec-title">Contributions</div>
-  <ol class="contrib-list">
-    <li>A <strong>438-paper classification</strong> of detection research (2017–2025) across a five-category threat taxonomy (T1–T5), showing 71.0% concentration on T1 public-figure video.</li>
-    <li>A <strong>harm distribution</strong> synthesized from IC3, IWF, AIID, StopNCII.org, and victim surveys, concentrated on NCII, voice-clone scams, and peer-distributed manipulation.</li>
-    <li>A <strong>structural diagnosis</strong> of why the misalignment persists: benchmark inheritance, dataset-ethics asymmetry, and salience-driven attention allocation.</li>
-    <li><strong>Three concrete research agendas</strong> for the under-defended categories, defended on harm-proportionality and ML-tractability.</li>
-  </ol>
+<div class="stat">
+<div class="stat-number">71%</div>
+<div class="stat-label">Research Focus</div>
+<div class="stat-desc">Papers targeting public-figure video manipulation</div>
+</div>
 
-  <hr>
+<div class="stat">
+<div class="stat-number">260×</div>
+<div class="stat-label">Growth</div>
+<div class="stat-desc">Increase in reported AI-CSAM videos from 2024 to 2025</div>
+</div>
 
-  <div class="sec-title">Proposed Research Agendas</div>
-  <div class="agenda-block">
-    <div class="agenda-item">
-      <div class="agenda-head"><span class="roman">I.</span> Real-Time Voice-Clone Detection for Telecommunications</div>
-      <div class="agenda-body">Streaming synthesis-probability estimation under telephony codecs with sub-second latency budgets, channel-robust evaluation under realistic packet loss and bandwidth restriction, and speaker-conditional verification layered on synthesis detection.</div>
-    </div>
-    <div class="agenda-item">
-      <div class="agenda-head"><span class="roman">II.</span> On-Device Privacy-Preserving NCII Detection</div>
-      <div class="agenda-body">Low-reference few-shot verification within victim trust boundaries, federated and on-device inference where candidate images never leave the device, and workflow integration with StopNCII.org hash matching, platform trust-and-safety APIs, and national hotlines.</div>
-    </div>
-    <div class="agenda-item">
-      <div class="agenda-head"><span class="roman">III.</span> Messaging-Layer Defenses for Peer-Distributed Content</div>
-      <div class="agenda-body">Tiny on-device detectors operating before encryption under constrained compute, re-encoding-robust provenance signals that survive messaging-platform pipelines, and graph-based distribution-pattern signals under privacy-preserving constraints.</div>
-    </div>
-  </div>
+<div class="stat">
+<div class="stat-number">0 / 13</div>
+<div class="stat-label">Benchmarks</div>
+<div class="stat-desc">Benchmarks directly evaluating T2, T4, or T5 threats</div>
+</div>
 
-  <hr>
+<div class="stat">
+<div class="stat-number">438</div>
+<div class="stat-label">Papers</div>
+<div class="stat-desc">Detection papers categorized from 2017–2025</div>
+</div>
 
-  <div class="sec-title">BibTeX</div>
-  <div class="bibtex-block">
-    <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent)">Copy</button>
-    <pre>@inproceedings{raza2026deepfakeswemissed,
-  title     = {The Deepfakes We Missed: We Built Detectors
-               for a Threat That Didn't Arrive},
-  author    = {Raza, Shaina},
- 
-  year      = {2026}
+</div>
+
+<hr>
+
+<div class="section-title">Research Allocation vs. Observed Harm</div>
+
+<div class="figure">
+
+<div class="bar-chart">
+
+<div class="bar-group">
+<div class="bar-value">75</div>
+<div class="bar" style="height:24px;background:#c4c4c4;"></div>
+<div class="bar-label">T1 Papers<br>(2024)</div>
+</div>
+
+<div class="bar-group">
+<div class="bar-value">3,443</div>
+<div class="bar" style="height:110px;background:#dc2626;"></div>
+<div class="bar-label">Reported AI-CSAM<br>Videos</div>
+</div>
+
+<div class="bar-group">
+<div class="bar-value">22,364</div>
+<div class="bar" style="height:180px;background:#7c3aed;"></div>
+<div class="bar-label">IC3 Complaints<br>(2025)</div>
+</div>
+
+</div>
+
+<div class="caption">
+<strong>Figure.</strong> Comparison between research allocation and observed harm indicators. Public-figure video detection dominates the literature, while rapidly growing harm categories remain comparatively under-explored.
+</div>
+
+</div>
+
+<hr>
+
+<div class="section-title">Threat Taxonomy</div>
+
+<div class="table-wrap">
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Threat Category</th>
+<th>Corpus Share</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><span class="code">T1</span></td>
+<td>Public-figure face-swap and talking-head video</td>
+<td>71.0%</td>
+</tr>
+
+<tr>
+<td><span class="code">T3</span></td>
+<td>Audio and voice-clone detection</td>
+<td>28.5%</td>
+</tr>
+
+<tr>
+<td><span class="code">T2</span></td>
+<td>Peer-generated NCII</td>
+<td>Minimal representation</td>
+</tr>
+
+<tr>
+<td><span class="code">T5</span></td>
+<td>Messaging-layer and peer-distributed manipulation</td>
+<td>Minimal representation</td>
+</tr>
+
+<tr>
+<td><span class="code">T4</span></td>
+<td>Real-time and live-stream manipulation</td>
+<td>No dedicated papers identified</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<hr>
+
+<div class="section-title">Main Contributions</div>
+
+<ol class="contrib-list">
+
+<li>
+A classification of 438 deepfake detection papers published between 2017 and 2025 across five threat categories.
+</li>
+
+<li>
+An empirical comparison between research allocation and observed real-world harms using evidence synthesized from IC3, IWF, AIID, and victim-centered reporting systems.
+</li>
+
+<li>
+A structural analysis explaining why research misalignment persists, including benchmark inheritance, dataset asymmetry, and visibility-driven prioritization.
+</li>
+
+<li>
+Three research agendas targeting under-defended harm categories with strong societal relevance and technical feasibility.
+</li>
+
+</ol>
+
+<hr>
+
+<div class="section-title">Research Agendas</div>
+
+<div class="agenda">
+
+<div class="agenda-item">
+<div class="agenda-title">
+I. Real-Time Voice-Clone Detection for Telecommunications
+</div>
+<div class="agenda-body">
+Development of streaming synthesis detection systems robust to telephony codecs, packet loss, and low-bandwidth environments while maintaining sub-second latency constraints.
+</div>
+</div>
+
+<div class="agenda-item">
+<div class="agenda-title">
+II. Privacy-Preserving NCII Detection
+</div>
+<div class="agenda-body">
+On-device and federated approaches for victim-centered verification workflows where sensitive candidate images remain local to the user device.
+</div>
+</div>
+
+<div class="agenda-item">
+<div class="agenda-title">
+III. Messaging-Layer Defenses
+</div>
+<div class="agenda-body">
+Detection systems designed for peer-distributed synthetic media, including lightweight encrypted-platform detectors and distribution-pattern analysis under privacy constraints.
+</div>
+</div>
+
+</div>
+
+<hr>
+
+<div class="section-title">BibTeX</div>
+
+<div class="bibtex">
+
+<pre>@inproceedings{raza2026deepfakeswemissed,
+  title  = {The Deepfakes We Missed:
+            We Built Detection Systems
+            for a Threat Model That Never Fully Materialized},
+  author = {Raza, Shaina},
+  year   = {2026}
 }</pre>
-  </div>
 
-  <div class="footer">
-    &copy; 2026 <a href="https://shainaraza.github.io/" target="_blank">Shaina Raza</a> &middot; <a href="https://vectorinstitute.ai" target="_blank">Vector Institute for Artificial Intelligence</a>
-  </div>
+</div>
+
+<div class="footer">
+© 2026
+<a href="https://shainaraza.github.io/">Shaina Raza</a>
+·
+<a href="https://vectorinstitute.ai/">Vector Institute for Artificial Intelligence</a>
+</div>
 
 </div>
 
